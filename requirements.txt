@@ -8,3 +8,10 @@ pydantic-settings
 
 # Utilities
 httpx
+
+# LLM / Agent framework
+langchain
+langgraph
+
+# Google Gemini integration
+langchain-google-genai

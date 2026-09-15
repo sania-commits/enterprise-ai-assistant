@@ -1,0 +1,33 @@
+# Virtual environment
+.venv-4/
+.venv/
+venv/
+
+# Environment variables / secrets
+.env
+.env.local
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Model / vector database artifacts
+models/
+vectorstore/
+chroma_db/
+
+# Generated data
+data/processed/

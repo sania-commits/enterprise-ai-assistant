@@ -1,0 +1,11 @@
+INFORMATION SECURITY POLICY
+
+Employees must use strong passwords and enable multi-factor authentication on company accounts.
+
+Company credentials must never be shared with another employee or external party.
+
+Confidential company information must only be stored using approved company systems.
+
+Employees working remotely must connect through the company-approved VPN when accessing sensitive internal systems.
+
+Suspected security incidents, phishing attempts, or compromised credentials must be reported immediately to the IT security team.

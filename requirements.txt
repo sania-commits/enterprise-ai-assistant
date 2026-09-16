@@ -15,3 +15,12 @@ langgraph
 
 # Google Gemini integration
 langchain-google-genai
+
+# RAG / Document processing
+langchain-community
+langchain-text-splitters
+pypdf
+
+# Vector database
+langchain-chroma
+chromadb

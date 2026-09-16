@@ -1,3 +1,4 @@
+from agents.tools import calculator
 from agents.state import AgentState
 from backend.llm import get_llm
 from rag.rag_chain import ask_documents
@@ -48,5 +49,39 @@ def general_node(state: AgentState):
 
     return {
         "answer": answer,
+        "sources": [],
+    }
+
+def calculator_node(state: AgentState):
+    """Use the calculator tool for mathematical questions."""
+
+    llm = get_llm()
+
+    prompt = f"""
+Convert the user's calculation request into ONLY a mathematical expression.
+
+Examples:
+"What is 20 percent of 500?"
+→ 500 * 0.20
+
+"What is 150 plus 25?"
+→ 150 + 25
+
+Do not explain anything.
+Return only the expression.
+
+Question:
+{state["question"]}
+"""
+
+    response = llm.invoke(prompt)
+    expression = extract_text(response.content).strip()
+
+    result = calculator.invoke(
+        {"expression": expression}
+    )
+
+    return {
+        "answer": result,
         "sources": [],
     }

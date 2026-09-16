@@ -24,33 +24,37 @@ def router_node(state: AgentState):
     question = state["question"]
 
     prompt = f"""
-You are a routing component for an enterprise AI assistant.
+	You are a routing component for an enterprise AI assistant.
 
-Classify the user's question into exactly one category:
+	Classify the user's question into exactly one category:
 
-rag
-- Questions about company policies, employees, internal procedures,
-  security rules, remote work, leave, or company-specific information.
+	rag
+	- Questions about company policies, employees, internal procedures,
+  	security rules, remote work, leave, or company-specific information.
 
-general
-- General knowledge, educational, technical, or conceptual questions
-  that do not require company documents.
+	calculator
+	- Questions that require arithmetic or calculation.
 
-Return ONLY one word:
-rag
-or
-general
+	general
+	- General knowledge, educational, technical, or conceptual questions
+ 	 that do not require company documents or arithmetic calculation.
 
-Question:
-{question}
-"""
+	Return ONLY one word:
+       	rag
+       calculator
+       or
+       general
+
+       Question:
+       {question}
+        """  
 
     llm = get_llm()
     response = llm.invoke(prompt)
 
     route = extract_text(response.content).strip().lower()
 
-    if route not in {"rag", "general"}:
+    if route not in {"rag","calculator", "general"}:
         route = "general"
 
     return {

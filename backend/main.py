@@ -1,6 +1,8 @@
 from fastapi import FastAPI
-from backend.schemas import AskRequest, AskResponse
+
 from agents.graph import agent_graph
+from backend.schemas import AskRequest, AskResponse
+
 
 app = FastAPI(
     title="Enterprise AI Assistant API",
@@ -22,15 +24,24 @@ def health_check():
         "status": "healthy"
     }
 
+
 @app.post("/ask", response_model=AskResponse)
 def ask_question(request: AskRequest):
+    config = {
+        "configurable": {
+            "thread_id": request.thread_id
+        }
+    }
+
     result = agent_graph.invoke(
         {
             "question": request.question,
             "route": "",
             "answer": "",
             "sources": [],
-        }
+            "history": [],
+        },
+        config=config,
     )
 
     return AskResponse(

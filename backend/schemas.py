@@ -5,7 +5,13 @@ class AskRequest(BaseModel):
     question: str = Field(
         ...,
         min_length=3,
-        description="Question to ask the enterprise knowledge base",
+        description="Question to ask the enterprise AI assistant",
+    )
+
+    thread_id: str = Field(
+        ...,
+        min_length=1,
+        description="Unique conversation thread identifier",
     )
 
 

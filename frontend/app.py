@@ -196,7 +196,7 @@ if question:
             # HTTP / BACKEND ERROR HANDLING
             # ------------------------------------------
 
-                        except httpx.HTTPStatusError as error:
+            except httpx.HTTPStatusError as error:
                 try:
                     detail = error.response.json().get(
                         "detail",

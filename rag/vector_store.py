@@ -3,7 +3,10 @@ from langchain_chroma import Chroma
 from rag.embeddings import get_embeddings
 
 
-PERSIST_DIRECTORY = "chroma_db"
+from pathlib import Path
+
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+PERSIST_DIRECTORY = PROJECT_ROOT / "chroma_db"
 
 
 def create_vector_store(chunks):

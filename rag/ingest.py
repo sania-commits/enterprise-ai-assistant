@@ -9,7 +9,8 @@ from rag.vector_store import (
 )
 
 
-DATA_DIRECTORY = Path("data/raw")
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+DATA_DIRECTORY = PROJECT_ROOT / "data" / "raw"
 
 
 def ingest_documents():

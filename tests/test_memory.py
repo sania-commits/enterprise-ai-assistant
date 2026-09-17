@@ -5,18 +5,18 @@ from langgraph.checkpoint.memory import InMemorySaver
 from langgraph.graph import END, START, StateGraph
 
 
-class TestState(TypedDict):
+class MemoryState(TypedDict):
     history: Annotated[list[str], operator.add]
 
 
-def add_message(state: TestState):
+def add_message(state: MemoryState):
     return {
         "history": ["New message"]
     }
 
 
 def build_test_graph():
-    builder = StateGraph(TestState)
+    builder = StateGraph(MemoryState)
 
     builder.add_node("add_message", add_message)
 

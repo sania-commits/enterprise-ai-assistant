@@ -196,11 +196,30 @@ if question:
             # HTTP / BACKEND ERROR HANDLING
             # ------------------------------------------
 
-            except httpx.HTTPError as error:
+                        except httpx.HTTPStatusError as error:
+                try:
+                    detail = error.response.json().get(
+                        "detail",
+                        "The AI service returned an error.",
+                    )
+                except ValueError:
+                    detail = (
+                        "The AI service returned an error."
+                    )
 
+                st.error(detail)
+
+                st.session_state.messages.append(
+                    {
+                        "role": "assistant",
+                        "content": detail,
+                    }
+                )
+
+            except httpx.RequestError:
                 error_message = (
-                    "Unable to contact the AI service. "
-                    f"Details: {error}"
+                    "Unable to connect to the AI service. "
+                    "Please check that the backend is running."
                 )
 
                 st.error(error_message)

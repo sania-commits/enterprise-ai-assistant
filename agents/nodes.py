@@ -1,3 +1,4 @@
+from pathlib import Path
 from agents.tools import calculator
 from agents.state import AgentState
 from backend.llm import get_llm
@@ -34,10 +35,12 @@ def rag_node(state: AgentState):
 
     sources = sorted(
         {
-            document.metadata.get(
-                "source",
-                "unknown",
-            )
+            Path(
+                document.metadata.get(
+                    "source",
+                    "unknown",
+                )
+            ).name
             for document in documents
         }
     )

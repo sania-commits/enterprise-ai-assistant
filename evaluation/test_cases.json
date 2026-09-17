@@ -1,0 +1,32 @@
+[
+  {
+    "question": "How many annual leave days do employees receive?",
+    "expected_route": "rag",
+    "expected_keyword": "24"
+  },
+  {
+    "question": "How many days per week can eligible employees work remotely?",
+    "expected_route": "rag",
+    "expected_keyword": "three"
+  },
+  {
+    "question": "What are the core collaboration hours for remote employees?",
+    "expected_route": "rag",
+    "expected_keyword": "10:00 AM"
+  },
+  {
+    "question": "What should an employee do after receiving a phishing attempt?",
+    "expected_route": "rag",
+    "expected_keyword": "IT security"
+  },
+  {
+    "question": "What is 18 percent of 2500?",
+    "expected_route": "calculator",
+    "expected_keyword": "450"
+  },
+  {
+    "question": "Explain what machine learning is.",
+    "expected_route": "general",
+    "expected_keyword": "machine"
+  }
+]

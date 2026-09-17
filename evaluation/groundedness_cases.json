@@ -1,0 +1,27 @@
+[
+  {
+    "question": "How many paid annual leave days do employees receive?",
+    "answerable": true,
+    "expected_keyword": "24"
+  },
+  {
+    "question": "What are the core collaboration hours?",
+    "answerable": true,
+    "expected_keyword": "10:00 AM"
+  },
+  {
+    "question": "What should employees do after a phishing attempt?",
+    "answerable": true,
+    "expected_keyword": "IT security"
+  },
+  {
+    "question": "What is the company's maternity leave policy?",
+    "answerable": false,
+    "expected_keyword": "don't have enough information"
+  },
+  {
+    "question": "What health insurance provider does the company use?",
+    "answerable": false,
+    "expected_keyword": "don't have enough information"
+  }
+]

@@ -1,4 +1,5 @@
-from typing import TypedDict
+from typing import Annotated, TypedDict
+import operator
 
 
 class AgentState(TypedDict):
@@ -6,3 +7,5 @@ class AgentState(TypedDict):
     route: str
     answer: str
     sources: list[str]
+
+    history: Annotated[list[str], operator.add]

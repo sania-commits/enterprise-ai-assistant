@@ -21,9 +21,21 @@ def extract_text(content):
 
 
 def rag_node(state: AgentState):
-    """Answer using enterprise documents."""
+    """Answer using enterprise documents and conversation history."""
 
-    answer, documents = ask_documents(state["question"])
+    history = "\n".join(
+        state.get("history", [])[-6:]
+    )
+
+    contextual_question = f"""
+Conversation history:
+{history}
+
+Current question:
+{state["question"]}
+"""
+
+    answer, documents = ask_documents(contextual_question)
 
     sources = sorted(
         {
@@ -35,21 +47,49 @@ def rag_node(state: AgentState):
     return {
         "answer": answer,
         "sources": sources,
+        "history": [
+            f"User: {state['question']}",
+            f"Assistant: {answer}",
+        ],
     }
 
 
 def general_node(state: AgentState):
-    """Answer general questions using the LLM."""
+    """Answer general questions using the LLM and conversation history."""
 
     llm = get_llm()
+    history = "\n".join(
+    state.get("history", [])[-6:]
+)
+    history = "\n".join(
+        state.get("history", [])[-6:]
+    )
 
-    response = llm.invoke(state["question"])
+    prompt = f"""
+You are an enterprise AI assistant.
 
+Use the conversation history when it is relevant to understand
+the user's current question.
+
+Conversation history:
+{history}
+
+Current question:
+{state["question"]}
+
+Answer:
+"""
+
+    response = llm.invoke(prompt)
     answer = extract_text(response.content)
 
     return {
         "answer": answer,
         "sources": [],
+        "history": [
+            f"User: {state['question']}",
+            f"Assistant: {answer}",
+        ],
     }
 
 def calculator_node(state: AgentState):
@@ -82,6 +122,10 @@ Question:
     )
 
     return {
-        "answer": result,
-        "sources": [],
+    "answer": result,
+    "sources": [],
+    "history": [
+        f"User: {state['question']}",
+        f"Assistant: {result}",
+        ],
     }

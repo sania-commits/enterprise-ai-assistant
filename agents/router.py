@@ -22,7 +22,7 @@ def router_node(state: AgentState):
     """Decide whether the question needs RAG or general LLM knowledge."""
 
     question = state["question"]
-
+    history = "\n".join(state.get("history", []))
     prompt = f"""
 	You are a routing component for an enterprise AI assistant.
 
@@ -45,9 +45,12 @@ def router_node(state: AgentState):
        or
        general
 
-       Question:
-       {question}
-        """  
+    Conversation history:
+    {history}
+
+    Current question:
+    {question}
+    """
 
     llm = get_llm()
     response = llm.invoke(prompt)

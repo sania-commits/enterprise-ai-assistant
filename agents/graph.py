@@ -1,3 +1,5 @@
+from langgraph.checkpoint.memory import InMemorySaver
+
 from langgraph.graph import END, START, StateGraph
 
 from agents.nodes import calculator_node, general_node, rag_node
@@ -41,7 +43,11 @@ def build_agent_graph():
     builder.add_edge("calculator", END)
     builder.add_edge("general", END)
 
-    return builder.compile()
+    memory = InMemorySaver()
+
+    return builder.compile(
+             checkpointer=memory
+    )
 
 
 agent_graph = build_agent_graph()

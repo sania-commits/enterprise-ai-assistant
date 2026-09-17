@@ -1,0 +1,33 @@
+# Git
+.git
+.gitignore
+
+# Python environments
+.venv-4
+.venv
+venv
+
+# Python cache
+__pycache__
+*.pyc
+*.pyo
+.pytest_cache
+
+# Secrets
+.env
+.env.local
+
+# IDE
+.vscode
+.idea
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Local vector database
+chroma_db
+
+# Tests and development artifacts
+.pytest_cache
+*.log

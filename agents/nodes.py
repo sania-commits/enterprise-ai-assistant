@@ -27,19 +27,17 @@ def rag_node(state: AgentState):
         state.get("history", [])[-6:]
     )
 
-    contextual_question = f"""
-Conversation history:
-{history}
-
-Current question:
-{state["question"]}
-"""
-
-    answer, documents = ask_documents(contextual_question)
+    answer, documents = ask_documents(
+        question=state["question"],
+        history=history,
+    )
 
     sources = sorted(
         {
-            document.metadata.get("source", "unknown")
+            document.metadata.get(
+                "source",
+                "unknown",
+            )
             for document in documents
         }
     )

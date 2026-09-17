@@ -1,1 +1,0 @@
-The Enterprise AI Assistant uses retrieval augmented generation to answer questions using company documents.

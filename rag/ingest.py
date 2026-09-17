@@ -48,18 +48,18 @@ def ingest_documents():
     vector_database = Path(PERSIST_DIRECTORY)
 
     if vector_database.exists():
-        shutil.rmtree(vector_database)
+        for item in vector_database.iterdir():
+            if item.is_dir():
+                shutil.rmtree(item)
+            else:
+                item.unlink()
+
         print(
-            f"Removed existing vector database: "
+            f"Cleared existing vector database: "
             f"{PERSIST_DIRECTORY}"
         )
 
     create_vector_store(chunks)
-
-    print(
-        f"Vector database created: "
-        f"{PERSIST_DIRECTORY}"
-    )
 
 
 if __name__ == "__main__":

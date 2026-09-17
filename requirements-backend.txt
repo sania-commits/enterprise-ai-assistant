@@ -1,0 +1,23 @@
+# API
+fastapi
+uvicorn[standard]
+
+# Configuration
+python-dotenv
+pydantic-settings
+
+# LLM / Agent framework
+langchain
+langgraph
+
+# Google Gemini
+langchain-google-genai
+
+# RAG / Document processing
+langchain-community
+langchain-text-splitters
+pypdf
+
+# Vector database
+langchain-chroma
+chromadb

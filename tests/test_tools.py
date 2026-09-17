@@ -61,3 +61,35 @@ def test_rejects_variable_names():
     assert result == (
         "Unable to calculate the expression."
     )
+
+
+def test_rejects_large_exponent():
+    result = calculator.invoke(
+        {"expression": "2 ** 1000000"}
+    )
+
+    assert result == (
+        "Unable to calculate the expression."
+    )
+
+
+def test_rejects_extremely_large_result():
+    result = calculator.invoke(
+        {"expression": "10 ** 101"}
+    )
+
+    assert result == (
+        "Unable to calculate the expression."
+    )
+
+
+def test_rejects_long_expression():
+    expression = "1+" * 101 + "1"
+
+    result = calculator.invoke(
+        {"expression": expression}
+    )
+
+    assert result == (
+        "Unable to calculate the expression."
+    )

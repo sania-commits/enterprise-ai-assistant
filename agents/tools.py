@@ -20,6 +20,11 @@ UNARY_OPERATORS = {
 }
 
 
+MAX_EXPRESSION_LENGTH = 200
+MAX_EXPONENT = 100
+MAX_ABS_VALUE = 1e100
+
+
 def evaluate_expression(node):
     """Safely evaluate supported arithmetic AST nodes."""
 
@@ -28,6 +33,11 @@ def evaluate_expression(node):
 
     if isinstance(node, ast.Constant):
         if isinstance(node.value, (int, float)):
+            if abs(node.value) > MAX_ABS_VALUE:
+                raise ValueError(
+                    "Number is too large."
+                )
+
             return node.value
 
         raise ValueError(
@@ -47,10 +57,25 @@ def evaluate_expression(node):
         left = evaluate_expression(node.left)
         right = evaluate_expression(node.right)
 
-        return operator_function(
+        if (
+            isinstance(node.op, ast.Pow)
+            and abs(right) > MAX_EXPONENT
+        ):
+            raise ValueError(
+                "Exponent is too large."
+            )
+
+        result = operator_function(
             left,
             right,
         )
+
+        if abs(result) > MAX_ABS_VALUE:
+            raise ValueError(
+                "Calculation result is too large."
+            )
+
+        return result
 
     if isinstance(node, ast.UnaryOp):
         operator_function = UNARY_OPERATORS.get(
@@ -66,9 +91,16 @@ def evaluate_expression(node):
             node.operand
         )
 
-        return operator_function(
+        result = operator_function(
             operand
         )
+
+        if abs(result) > MAX_ABS_VALUE:
+            raise ValueError(
+                "Calculation result is too large."
+            )
+
+        return result
 
     raise ValueError(
         "Unsupported mathematical expression."
@@ -80,6 +112,11 @@ def calculator(expression: str) -> str:
     """Calculate a basic mathematical expression safely."""
 
     try:
+        if len(expression) > MAX_EXPRESSION_LENGTH:
+            raise ValueError(
+                "Expression is too long."
+            )
+
         parsed_expression = ast.parse(
             expression,
             mode="eval",

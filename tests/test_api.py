@@ -86,3 +86,26 @@ def test_ask_endpoint_rejects_short_question():
     )
 
     assert response.status_code == 422
+
+@patch("backend.main.agent_graph.invoke")
+def test_ask_endpoint_handles_quota_error(mock_invoke):
+    mock_invoke.side_effect = Exception(
+        "429 RESOURCE_EXHAUSTED: quota exceeded"
+    )
+
+    response = client.post(
+        "/ask",
+        json={
+            "question": "What is the remote work policy?",
+            "thread_id": "quota-test-thread",
+        },
+    )
+
+    assert response.status_code == 429
+
+    assert response.json() == {
+        "detail": (
+            "AI provider quota temporarily exceeded. "
+            "Please try again later."
+        )
+    }

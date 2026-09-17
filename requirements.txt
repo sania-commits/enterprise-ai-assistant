@@ -24,3 +24,6 @@ pypdf
 # Vector database
 langchain-chroma
 chromadb
+
+# Frontend
+streamlit

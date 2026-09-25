@@ -4,6 +4,19 @@ An end-to-end enterprise Generative AI application combining Retrieval-Augmented
 
 The system intelligently routes user queries between enterprise document retrieval, mathematical calculation, and general-purpose LLM reasoning.
 
+## 🚀 Live Deployment
+
+**Live Application:**
+https://enterprise-ai-assistant-sania.streamlit.app
+
+**Backend API:**
+https://enterprise-ai-assistant-backend-rhg2.onrender.com
+
+**Interactive API Documentation:**
+https://enterprise-ai-assistant-backend-rhg2.onrender.com/docs
+
+> The backend is hosted on Render's free tier and may take a short time to wake up after a period of inactivity.
+
 ## Key Features
 
 - Retrieval-Augmented Generation (RAG) over enterprise documents

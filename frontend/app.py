@@ -4,10 +4,15 @@ import uuid
 import httpx
 import streamlit as st
 
-API_URL = os.getenv(
-    "API_URL",
-    "http://127.0.0.1:8000",
-).rstrip("/")
+API_URL = os.getenv("API_URL")
+
+if not API_URL:
+    try:
+        API_URL = st.secrets["API_URL"]
+    except (KeyError, FileNotFoundError):
+        API_URL = "http://127.0.0.1:8000"
+
+API_URL = API_URL.rstrip("/")
 
 
 # --------------------------------------------------
